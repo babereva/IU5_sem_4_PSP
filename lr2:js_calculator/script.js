@@ -1,15 +1,17 @@
 window.onload = function() {
-
   let a = ''
   let b = ''
   let expressionResult = ''
   let selectedOperation = null
-
   const outputElement = document.getElementById("result")
   const digitButtons = document.querySelectorAll('[id ^= "btn_digit_"]')
 
   function updateDisplay(value) {
     outputElement.innerHTML = value
+  }
+
+  function displayResult(num) {
+    updateDisplay(parseFloat(num.toFixed(5)).toString())
   }
 
   function onDigitButtonClicked(digit) {
@@ -73,7 +75,6 @@ window.onload = function() {
 
   document.getElementById("btn_op_equal").onclick = function() {
     if (a === '' || b === '' || !selectedOperation) return
-
     switch (selectedOperation) {
       case 'x':
         expressionResult = (+a) * (+b)
@@ -97,27 +98,31 @@ window.onload = function() {
       default:
         break
     }
-
     a = expressionResult.toString()
     b = ''
     selectedOperation = null
-    updateDisplay(a)
+    displayResult(expressionResult)
   }
 
   document.getElementById("btn_op_sqrt").onclick = function() {
     if (a === '') return
     if (+a < 0) {
       updateDisplay('Ошибка')
+      a = ''
+      b = ''
+      selectedOperation = null
       return
     }
-    a = Math.sqrt(+a).toString()
-    updateDisplay(a)
+    const result = Math.sqrt(+a)
+    a = result.toString()
+    displayResult(result)
   }
 
   document.getElementById("btn_op_square").onclick = function() {
     if (a === '') return
-    a = ((+a) * (+a)).toString()
-    updateDisplay(a)
+    const result = (+a) * (+a)
+    a = result.toString()
+    displayResult(result)
   }
 
   document.getElementById("btn_op_000").onclick = function() {
@@ -135,6 +140,9 @@ window.onload = function() {
     const num = parseInt(+a)
     if (num < 0 || !Number.isInteger(+a)) {
       updateDisplay('Ошибка')
+      a = ''
+      b = ''
+      selectedOperation = null
       return
     }
     let result = 1
@@ -142,7 +150,7 @@ window.onload = function() {
       result *= i
     }
     a = result.toString()
-    updateDisplay(a)
+    displayResult(result)
   }
 
   document.getElementById("btn_op_backspace").onclick = function() {
@@ -159,7 +167,6 @@ window.onload = function() {
     if (a === '') return
     const portion = (+a) / 6
     a = portion.toString()
-    updateDisplay(a + ' мл')
+    updateDisplay(parseFloat(portion.toFixed(5)).toString() + ' мл')
   }
-
 }
