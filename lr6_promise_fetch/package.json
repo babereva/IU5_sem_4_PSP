@@ -1,0 +1,22 @@
+{
+  "name": "lab_06",
+  "version": "1.0.0",
+  "description": "Лабораторная работа 6 — fetch + Promise + сборка Vite (Молочная кухня Тёма)",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "three": "^0.184.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
