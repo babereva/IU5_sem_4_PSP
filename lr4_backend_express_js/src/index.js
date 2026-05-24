@@ -20,6 +20,8 @@ app.use((req, res, next) => {
     next(); // Обязательно вызываем next(), иначе запрос зависнет
 });
 
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
 // подключение маршрутов
 app.use('/products', productsRouter);
 
